@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOGA TIPS By ADIL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d5016;
+            --secondary: #6b8e4e;
+            --accent: #d4a574;
+            --light: #f5f1e8;
+            --dark: #1a1a1a;
+            --cream: #faf8f3;
+            --earth: #8b7355;
+            --sage: #9caf88;
+            --terracotta: #c17e5e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 241, 232, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 20px rgba(45, 80, 22, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.9), rgba(107, 142, 78, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="lotus" patternUnits="userSpaceOnUse" width="100" height="100"><path d="M50,20 Q30,40 30,60 T50,80 T70,60 T70,40 Q70,30 50,20" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="1200" height="600" fill="url(%23lotus)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            padding: 1rem 3rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--terracotta);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '✦';
+            display: block;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        /* Yoga Poses Grid */
+        .poses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .pose-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pose-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .pose-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--sage), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pose-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        .pose-content {
+            padding: 2rem;
+        }
+
+        .pose-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .pose-content p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .pose-steps {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .pose-steps h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .pose-steps ol {
+            margin-left: 1.5rem;
+        }
+
+        .pose-steps li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .benefits {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(107, 142, 78, 0.1), rgba(156, 175, 136, 0.1));
+            border-left: 4px solid var(--accent);
+            border-radius: 5px;
+        }
+
+        .benefits strong {
+            color: var(--primary);
+        }
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, white, var(--light));
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--accent);
+        }
+
+        .tip-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        .tip-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--dark);
+            background: none;
+            border: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            padding: 2rem;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .notification-center {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .notification-item {
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+            background: var(--light);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .notification-time {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .send-notification {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--light), white);
+            border-radius: 15px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* User Menu */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            padding: 1rem;
+            min-width: 200px;
+        }
+
+        .dropdown.active {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 0.8rem;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 3rem 5%;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .poses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hide content initially */
+        .page-content {
+            display: block;
+        }
+
+        .page-content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">YOGA TIPS By ADIL</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('poses')">Poses</a></li>
+                <li><a href="#" onclick="showPage('tips')">Tips</a></li>
+                <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="openModal('loginModal')">Login</a></li>
+            </ul>
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <div class="user-avatar" onclick="toggleDropdown()">
+                    <span id="userInitial">U</span>
+                </div>
+                <div class="dropdown" id="userDropdown">
+                    <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+                    <a href="#" onclick="openModal('changePasswordModal')">Change Password</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="page-content" id="homeContent">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>YOGA TIPS By ADIL</h1>
+                <p>Transform Your Mind, Body & Soul</p>
+                <button class="btn" onclick="showPage('poses')">Explore Poses</button>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section class="section">
+            <h2 class="section-title">Welcome to Your Yoga Journey</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8; color: #555;">
+                Discover the ancient art of yoga with our comprehensive guide. Whether you're a beginner or an experienced practitioner, 
+                we provide detailed instructions, tips, and personalized tracking to enhance your practice.
+            </p>
+        </section>
+    </div>
+
+    <!-- Poses Section -->
+    <div class="page-content hidden" id="posesContent">
+        <section class="section" style="margin-top: 120px; opacity: 1; transform: none;">
+            <h2 class="section-title">Yoga Poses & Asanas</h2>
+            <div class="poses-grid">
+                <!-- Pose 1 -->
+                <div class="pose-card">
+                    <div class="pose-image">🧘‍♀️</div>
+                    <div class="pose-content">
+                        <h3>Mountain Pose (Tadasana)</h3>
+                        <p>The foundation of all standing poses, Mountain Pose improves posture and balance while grounding your energy.</p>
+                        <div class="pose-steps">
+                            <h4>Step-by-Step Instructions:</h4>
+                            <ol>
+                                <li>Stand with feet together, heels slightly apart</li>
+                                <li>Distribute weight evenly across both feet</li>
+                                <li>Engage your thighs and lift your kneecaps</li>
+                                <li>Lengthen your tailbone toward the floor</li>
+                                <li>Roll shoulders back and down</li>
+                                <li>Extend arms alongside body, palms facing forward</li>
+                                <li>Hold for 30 seconds to 1 minute, breathing deeply</li>
+                            </ol>
+                        </div>
+                        <div class="benefits">
+                            <strong>Benefits:</strong> Improves posture, strengthens thighs and ankles, increases awareness
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pose 2 -->
+                <div class="pose-card">
+                    <div class="pose-image">🙏</div>
+                    <div class="pose-content">
+                        <h3>Downward Dog (Adho Mukha Svanasana)</h3>
+                        <p>One of the most recognized yoga poses, Downward Dog energizes and rejuvenates the entire body.</p>
+                        <div class="pose-steps">
+                            <h4>Step-by-Step Instructions:</h4>
+                            <ol>
+                                <li>Start on hands and knees in tabletop position</li>
+                                <li>Spread fingers wide, press palms firmly</li>
+                                <li>Tuck toes and lift hips up and back</li>
+                                <li>Straighten legs without locking knees</li>
+                                <li>Press heels toward floor (they don't need to touch)</li>
+                                <li>Relax neck and let head hang</li>
+                                <li>Hold for 1-3 minutes, breathing steadily</li>
+                            </ol>
+                        </div>
+                        <div class="benefits">
+                            <strong>Benefits:</strong> Stretches hamstrings and calves, strengthens arms and legs, relieves stress
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pose 3 -->
+                <div class="pose-card">
+                    <div class="pose-image">🌳</div>
+                    <div class="pose-content">
+                        <h3>Tree Pose (Vrksasana)</h3>
+                        <p>A balancing pose that strengthens legs and core while improving focus and concentration.</p>
+                        <div class="pose-steps">
+                            <h4>Step-by-Step Instructions:</h4>
+                            <ol>
+                                <li>Begin in Mountain Pose</li>
+                                <li>Shift weight to left foot, ground firmly</li>
+                                <li>Bend right knee and place foot on inner left thigh</li>
+                                <li>Press foot and thigh together</li>
+                                <li>Bring hands to prayer position at chest</li>
+                                <li>Optional: raise arms overhead</li>
+                                <li>Hold for 30 seconds, switch sides</li>
+                            </ol>
+                        </div>
+                        <div class="benefits">
+                            <strong>Benefits:</strong> Improves balance, strengthens ankles and legs, enhances concentration
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pose 4 -->
+                <div class="pose-card">
+                    <div class="pose-image">⚡</div>
+                    <div class="pose-content">
+                        <h3>Warrior I (Virabhadrasana I)</h3>
+                        <p>A powerful standing pose that builds strength, stamina, and confidence.</p>
+                        <div class="pose-steps">
+                            <h4>Step-by-Step Instructions:</h4>
+                            <ol>
+                                <li>Step right foot forward about 3-4 feet</li>
+                                <li>Turn left foot out 45 degrees</li>
+                                <li>Bend right knee to 90 degrees</li>
+                                <li>Square hips to front of mat</li>
+                                <li>Raise arms overhead, palms facing each other</li>
+                                <li>Look up at thumbs, lift chest</li>
+                                <li>Hold 30 seconds to 1 minute, switch sides</li>
+                            </ol>
+                        </div>
+                        <div class="benefits">
+                            <strong>Benefits:</strong> Strengthens legs and core, stretches chest and shoulders, improves focus
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pose 5 -->
+                <div class="pose-card">
+                    <div class="pose-image">🦋</div>
+                    <div class="pose-content">
+                        <h3>Child's Pose (Balasana)</h3>
+                        <p>A gentle resting pose that calms the mind and relieves stress and tension.</p>
+                        <div class="pose-steps">
+                            <h4>Step-by-Step Instructions:</h4>
+                            <ol>
+                                <li>Kneel on mat with knees hip-width apart</li>
+                                <li>Sit back on heels</li>
+                                <li>Fold forward, extending arms in front</li>
+                                <li>Rest forehead on mat</li>
+                                <li>Relax shoulders and breathe deeply</li>
+                                <li>Hold for 1-5 minutes</li>
+                                <li>Use as rest pose whenever needed</li>
+                            </ol>
+                        </div>
+                        <div class="benefits">
+                            <strong>Benefits:</strong> Calms nervous system, stretches hips and thighs, relieves back pain
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pose 6 -->
+                <div class="pose-card">
+                    <div class="pose-image">🐍</div>
+                    <div class="pose-content">
+                        <h3>Cobra Pose (Bhujangasana)</h3>
+                        <p>A backbend that opens the chest and strengthens the spine while energizing the body.</p>
+                        <div class="pose-steps">
+                            <h4>Step-by-Step Instructions:</h4>
+                            <ol>
+                                <li>Lie face down with legs extended</li>
+                                <li>Place palms under shoulders</li>
+                                <li>Press tops of feet into mat</li>
+                                <li>Inhale and straighten arms, lifting chest</li>
+                                <li>Keep elbows slightly bent</li>
+                                <li>Draw shoulders back and down</li>
+                                <li>Hold for 15-30 seconds, release slowly</li>
+                            </ol>
+                        </div>
+                        <div class="benefits">
+                            <strong>Benefits:</strong> Strengthens spine, stretches chest and lungs, stimulates abdominal organs
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="page-content hidden" id="tipsContent">
+        <section class="section" style="margin-top: 120px; opacity: 1; transform: none;">
+            <h2 class="section-title">Essential Yoga Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🌅</div>
+                    <h3>Practice Timing</h3>
+                    <p>Practice yoga early morning on an empty stomach for maximum benefits. If morning isn't possible, wait 3-4 hours after meals.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🧘</div>
+                    <h3>Consistency Over Intensity</h3>
+                    <p>Regular practice is more important than long sessions. Even 15-20 minutes daily is better than occasional long practices.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">💨</div>
+                    <h3>Focus on Breathing</h3>
+                    <p>Breath is the bridge between body and mind. Coordinate movements with breath and practice pranayama regularly.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h3>Listen to Your Body</h3>
+                    <p>Never force yourself into a pose. Respect your body's limits and progress gradually to avoid injury.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🏠</div>
+                    <h3>Create Sacred Space</h3>
+                    <p>Dedicate a quiet, clean space for practice. Use a quality yoga mat and keep the area free from distractions.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">💧</div>
+                    <h3>Stay Hydrated</h3>
+                    <p>Drink water before practice but not during. Hydrate well after your session to help with recovery.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">👕</div>
+                    <h3>Wear Comfortable Clothes</h3>
+                    <p>Choose breathable, stretchy clothing that allows full range of motion without being too loose.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🎼</div>
+                    <h3>End with Savasana</h3>
+                    <p>Always end your practice with final relaxation pose. This allows your body to integrate the benefits.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📖</div>
+                    <h3>Study Yoga Philosophy</h3>
+                    <p>Yoga is more than physical practice. Learn about its philosophy through books and teachings.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="page-content hidden" id="dashboardContent">
+        <section class="section dashboard" style="margin-top: 120px; opacity: 1; transform: none;">
+            <div class="dashboard-header">
+                <h2>Welcome back, <span id="userName">Yogi</span>!</h2>
+                <p>Track your progress and stay motivated on your yoga journey</p>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">DAYS PRACTICED</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">POSES MASTERED</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">360</div>
+                    <div class="stat-label">MINUTES THIS WEEK</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">DAY STREAK</div>
+                </div>
+            </div>
+
+            <div class="notification-center">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary); font-size: 2rem;">Notifications</h3>
+                <div id="notificationList">
+                    <div class="notification-item">
+                        <div class="notification-time">2 hours ago</div>
+                        <p>Great job! You've completed your daily practice goal 🎉</p>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-time">1 day ago</div>
+                        <p>New pose added: Crow Pose (Bakasana) - Check it out!</p>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-time">3 days ago</div>
+                        <p>You're on a 7-day streak! Keep up the amazing work 💪</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="send-notification">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Send Notification</h3>
+                <div class="form-group">
+                    <label>Notification Message</label>
+                    <input type="text" id="notificationInput" placeholder="Enter your notification message">
+                </div>
+                <button class="btn" onclick="sendNotification()">Send Notification</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('loginModal')">×</button>
+            <h2 style="margin-bottom: 2rem; color: var(--primary); text-align: center;">Login</h2>
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Don't have an account? <a href="#" onclick="openModal('signupModal'); closeModal('loginModal')" style="color: var(--primary);">Sign Up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('signupModal')">×</button>
+            <h2 style="margin-bottom: 2rem; color: var(--primary); text-align: center;">Sign Up</h2>
+            <form onsubmit="signup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Sign Up</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Already have an account? <a href="#" onclick="openModal('loginModal'); closeModal('signupModal')" style="color: var(--primary);">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('changePasswordModal')">×</button>
+            <h2 style="margin-bottom: 2rem; color: var(--primary); text-align: center;">Change Password</h2>
+            <form onsubmit="changePassword(event)">
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" id="currentPassword" required placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" id="newPassword" required placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Change Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 YOGA TIPS By ADIL. Transform Your Life Through Yoga.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Made with 🧘‍♀️ and ❤️</p>
+    </footer>
+
+    <script>
+        // User authentication state
+        let isLoggedIn = false;
+        let currentUser = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const storedUser = localStorage.getItem('yogaUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                isLoggedIn = true;
+                updateUIForLoggedInUser();
+            }
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Page navigation
+        function showPage(page) {
+            const pages = ['homeContent', 'posesContent', 'tipsContent', 'dashboardContent'];
+            
+            if (page === 'dashboard' && !isLoggedIn) {
+                openModal('loginModal');
+                return;
+            }
+
+            pages.forEach(pageId => {
+                const element = document.getElementById(pageId);
+                if (pageId === page + 'Content') {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
+            });
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+        }
+
+        // Login
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Check if user exists
+            const users = JSON.parse(localStorage.getItem('yogaUsers') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                currentUser = user;
+                isLoggedIn = true;
+                localStorage.setItem('yogaUser', JSON.stringify(user));
+                updateUIForLoggedInUser();
+                closeModal('loginModal');
+                showPage('dashboard');
+                alert('Welcome back, ' + user.name + '!');
+            } else {
+                alert('Invalid credentials. Please try again or sign up.');
+            }
+        }
+
+        // Signup
+        function signup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('yogaUsers') || '[]');
+            
+            // Check if email already exists
+            if (users.find(u => u.email === email)) {
+                alert('Email already registered. Please login.');
+                return;
+            }
+
+            const newUser = { name, email, password };
+            users.push(newUser);
+            localStorage.setItem('yogaUsers', JSON.stringify(users));
+
+            currentUser = newUser;
+            isLoggedIn = true;
+            localStorage.setItem('yogaUser', JSON.stringify(newUser));
+            
+            updateUIForLoggedInUser();
+            closeModal('signupModal');
+            showPage('dashboard');
+            alert('Account created successfully! Welcome, ' + name + '!');
+        }
+
+        // Change Password
+        function changePassword(event) {
+            event.preventDefault();
+            const currentPass = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+
+            if (currentPass !== currentUser.password) {
+                alert('Current password is incorrect.');
+                return;
+            }
+
+            if (newPass !== confirmPass) {
+                alert('New passwords do not match.');
+                return;
+            }
+
+            if (newPass.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+
+            // Update password
+            currentUser.password = newPass;
+            localStorage.setItem('yogaUser', JSON.stringify(currentUser));
+
+            const users = JSON.parse(localStorage.getItem('yogaUsers') || '[]');
+            const userIndex = users.findIndex(u => u.email === currentUser.email);
+            if (userIndex !== -1) {
+                users[userIndex].password = newPass;
+                localStorage.setItem('yogaUsers', JSON.stringify(users));
+            }
+
+            closeModal('changePasswordModal');
+            alert('Password changed successfully!');
+            
+            // Clear form
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        // Logout
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            localStorage.removeItem('yogaUser');
+            
+            document.getElementById('userMenu').style.display = 'none';
+            document.getElementById('navLinks').style.display = 'flex';
+            document.getElementById('userDropdown').classList.remove('active');
+            
+            showPage('home');
+            alert('Logged out successfully!');
+        }
+
+        // Update UI for logged in user
+        function updateUIForLoggedInUser() {
+            document.getElementById('navLinks').style.display = 'none';
+            document.getElementById('userMenu').style.display = 'block';
+            document.getElementById('userInitial').textContent = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('userName').textContent = currentUser.name;
+        }
+
+        // Toggle dropdown
+        function toggleDropdown() {
+            document.getElementById('userDropdown').classList.toggle('active');
+        }
+
+        // Send notification
+        function sendNotification() {
+            const message = document.getElementById('notificationInput').value;
+            if (!message.trim()) {
+                alert('Please enter a notification message.');
+                return;
+            }
+
+            const notificationList = document.getElementById('notificationList');
+            const newNotification = document.createElement('div');
+            newNotification.className = 'notification-item';
+            newNotification.innerHTML = `
+                <div class="notification-time">Just now</div>
+                <p>${message}</p>
+            `;
+            notificationList.insertBefore(newNotification, notificationList.firstChild);
+            
+            document.getElementById('notificationInput').value = '';
+            alert('Notification sent successfully!');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const dropdown = document.getElementById('userDropdown');
+            
+            if (userMenu && !userMenu.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
